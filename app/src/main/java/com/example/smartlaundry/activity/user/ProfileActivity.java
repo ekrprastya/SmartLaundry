@@ -93,9 +93,9 @@ public class ProfileActivity extends AppCompatActivity {
         init();
         uid = session.getSPUid();
         if (uid.equals("nDb8qGUrSxZUPHWPbh4W9I7gVsH2")){
-           linearLayout.setVisibility(View.GONE);
-           linearLayoutbutton.setWeightSum(2);
-           btntopup.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.GONE);
+            linearLayoutbutton.setWeightSum(2);
+            btntopup.setVisibility(View.GONE);
         }
         databaseReference = FirebaseDatabase.getInstance().getReference(USERS);
         databaseReference2 = FirebaseDatabase.getInstance().getReference(USERS).child(TOPUP);
@@ -201,7 +201,7 @@ public class ProfileActivity extends AppCompatActivity {
                     } else {
                         String imageName = System.currentTimeMillis()+".jpeg";
                         //refrensi penyimpanan
-                         android.app.AlertDialog alertDialog =
+                        android.app.AlertDialog alertDialog =
                                 new SpotsDialog.Builder().setContext(ProfileActivity.this).build();
                         alertDialog.setMessage("Update Data");
                         alertDialog.setIcon(R.mipmap.ic_apk);
@@ -345,63 +345,63 @@ public class ProfileActivity extends AppCompatActivity {
                     }).check());
 
             btnsubmit.setOnClickListener(v15->{
-                    if (resultbukti!=null){
-                        if (radio25.isChecked()){
-                            topup = 25000;
-                        }
-                        if (radio50.isChecked()){
-                            topup = 50000;
-                        }
-                        if (raido75.isChecked()){
-                            topup = 75000;
-                        }
-                        if (radio100.isChecked()){
-                            topup = 100000;
-                        }
-                        android.app.AlertDialog alertDialog =
-                                new SpotsDialog.Builder().setContext(ProfileActivity.this).build();
-                        alertDialog.setMessage("Mohon Tunggu");
-                        alertDialog.setIcon(R.mipmap.ic_apk);
-                        alertDialog.show();
-                        String imageName = System.currentTimeMillis()+".jpeg";
-                        StorageReference storageReference2 = mStorageReference.child(STORAGE+imageName);
-                        UploadTask uploadTask = storageReference2.putFile(resultbukti);
-                        uploadTask.continueWithTask(task -> {
-                            if (!task.isSuccessful()) {
-                                throw Objects.requireNonNull(task.getException());
-                            }
-                            return storageReference2.getDownloadUrl();
-                        }).addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                String key =  databaseReference2.push().getKey();
-                                String nominal = session.getSpSaldoHitung();
-                                int saldo = Integer.parseInt(nominal);
-                                Uri downloaduri = task.getResult();
-                                String upload = Objects.requireNonNull(downloaduri).toString();
-                                TopUp topUp = new TopUp();
-                                topUp.setFotobukti(upload);
-                                topUp.setFoto(session.getSpPhoto());
-                                topUp.setUid(session.getSPUid());
-                                topUp.setNama(session.getSPNama());
-                                topUp.setSaldo(topup);
-                                topUp.setKey(key);
-                                topUp.setSaldolama(saldo);
-                                databaseReference2.push().setValue(topUp).addOnSuccessListener(aVoid -> {
-                                    alertDialog.dismiss();
-                                    Toasty.success(getApplicationContext(),"Top Up Berhasil,Menunggu Konfirmasi Admin",Toasty.LENGTH_SHORT).show();
-                                    dialogTopup.dismiss();
-
-                                }).addOnFailureListener(e -> {
-                                    Toasty.error(getApplicationContext(), Objects.requireNonNull(e.getMessage()),Toasty.LENGTH_SHORT).show();
-                                });
-
-
-                            }
-                        });
+                if (resultbukti!=null){
+                    if (radio25.isChecked()){
+                        topup = 25000;
                     }
-                    else {
-                        Toasty.warning(getApplicationContext(),"GAMBAR BELUM DI LAMPIRKAN",Toasty.LENGTH_SHORT).show();
+                    if (radio50.isChecked()){
+                        topup = 50000;
                     }
+                    if (raido75.isChecked()){
+                        topup = 75000;
+                    }
+                    if (radio100.isChecked()){
+                        topup = 100000;
+                    }
+                    android.app.AlertDialog alertDialog =
+                            new SpotsDialog.Builder().setContext(ProfileActivity.this).build();
+                    alertDialog.setMessage("Mohon Tunggu");
+                    alertDialog.setIcon(R.mipmap.ic_apk);
+                    alertDialog.show();
+                    String imageName = System.currentTimeMillis()+".jpeg";
+                    StorageReference storageReference2 = mStorageReference.child(STORAGE+imageName);
+                    UploadTask uploadTask = storageReference2.putFile(resultbukti);
+                    uploadTask.continueWithTask(task -> {
+                        if (!task.isSuccessful()) {
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        return storageReference2.getDownloadUrl();
+                    }).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()){
+                            String key =  databaseReference2.push().getKey();
+                            String nominal = session.getSpSaldoHitung();
+                            int saldo = Integer.parseInt(nominal);
+                            Uri downloaduri = task.getResult();
+                            String upload = Objects.requireNonNull(downloaduri).toString();
+                            TopUp topUp = new TopUp();
+                            topUp.setFotobukti(upload);
+                            topUp.setFoto(session.getSpPhoto());
+                            topUp.setUid(session.getSPUid());
+                            topUp.setNama(session.getSPNama());
+                            topUp.setSaldo(topup);
+                            topUp.setKey(key);
+                            topUp.setSaldolama(saldo);
+                            databaseReference2.push().setValue(topUp).addOnSuccessListener(aVoid -> {
+                                alertDialog.dismiss();
+                                Toasty.success(getApplicationContext(),"Top Up Berhasil,Menunggu Konfirmasi Admin",Toasty.LENGTH_SHORT).show();
+                                dialogTopup.dismiss();
+
+                            }).addOnFailureListener(e -> {
+                                Toasty.error(getApplicationContext(), Objects.requireNonNull(e.getMessage()),Toasty.LENGTH_SHORT).show();
+                            });
+
+
+                        }
+                    });
+                }
+                else {
+                    Toasty.warning(getApplicationContext(),"GAMBAR BELUM DI LAMPIRKAN",Toasty.LENGTH_SHORT).show();
+                }
             });
         });
         // session login
@@ -460,7 +460,7 @@ public class ProfileActivity extends AppCompatActivity {
                 editfoto.setImageURI(resultUri);
             }
         }
-        if (resultCode == Activity.RESULT_OK){
+        else if (resultCode == Activity.RESULT_OK){
             resultbukti = data.getData();
             bukti.setImageURI(resultbukti);
         }

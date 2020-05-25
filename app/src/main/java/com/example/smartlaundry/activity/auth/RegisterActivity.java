@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button tombolsubmit;
     private CircleImageView circleImageView;
     private String nama,nohp,alamat,email,foto,password;
-    private int saldo = 100000;
+    private int saldo = 0;
 
     private Uri resultUri;
     private StorageReference mStorageReference;
@@ -136,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
                 tieRegNohp.setError("No Hp Tidak Boleh Kosong !");
             }
             else if (alamat.isEmpty()) {
-                Toasty.warning(getApplicationContext(), "No HP Belum Di Isi !", Toasty.LENGTH_SHORT).show();
-                tieRegAlamat.setError("No Hp Tidak Boleh Kosong !");
+                Toasty.warning(getApplicationContext(), "Alamat Belum Di Isi !", Toasty.LENGTH_SHORT).show();
+                tieRegAlamat.setError("Alamat Tidak Boleh Kosong !");
             }
             else if (email.isEmpty()) {
                 Toasty.warning(getApplicationContext(), "Email Belum Di Isi !", Toasty.LENGTH_SHORT).show();
