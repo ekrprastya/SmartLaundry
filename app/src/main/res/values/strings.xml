@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SmartLaundry</string>
+    <string name="todo">TODO</string>
+    <string name="l_o_g_i_n">Sign In</string>
+    <string name="indicator">BallClipRotatePulseIndicator</string>
+    <string name="cukup_masukan_email_terdaftar_anda_untuk_melakukan_reset_password">Cukup Masukan Email Terdaftar Anda \n Untuk Melakukan Reset Password</string>
+    <string name="xxx">xxxx</string>
+    <string-array name="list1">
+        <item>-Pilih-</item>
+        <item>Jemput Pakaian</item>
+        <item>Pencucian</item>
+        <item>Selesai</item>
+    </string-array>
+
+    <string-array name="list2">
+        <item>-Pilih-</item>
+        <item>Pencucian</item>
+        <item>Selesai</item>
+    </string-array>
+</resources>
