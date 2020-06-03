@@ -88,58 +88,21 @@ public class DetailAdmin extends AppCompatActivity {
             dialogupdate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialogupdate.getWindow().getAttributes().windowAnimations = android.R.style.Animation_Dialog;
             dialogupdate.show();
-            Spinner spinner = dialogupdate.findViewById(R.id.spinnerupdate);
+            TextView spinner = dialogupdate.findViewById(R.id.kirimupdate);
             Button btncanel,btnupdate;
             btncanel = dialogupdate.findViewById(R.id.cancelupdateproses);
             btnupdate = dialogupdate.findViewById(R.id.submitupdateproses);
             if (step.equals("Sudah Dibayar")){
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(DetailAdmin.this, android.R.layout.simple_spinner_dropdown_item
-                        , getResources().getStringArray(R.array.list1));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        spin = parent.getItemAtPosition(position).toString();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+               spinner.setText("Jemput Pakaian");
+                spin = spinner.getText().toString();
             }
             else if (step.equals("Jemput Pakaian")){
-                ArrayAdapter<String> adapter =  new ArrayAdapter<>(DetailAdmin.this, android.R.layout.simple_spinner_dropdown_item
-                        , getResources().getStringArray(R.array.list2));
-                spinner.setAdapter(adapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        spin = parent.getItemAtPosition(position).toString();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+                spinner.setText("Pencucian");
+                spin = spinner.getText().toString();
             }
             else {
-                ArrayAdapter<String> adapter =  new ArrayAdapter<>(DetailAdmin.this, android.R.layout.simple_spinner_dropdown_item
-                        , getResources().getStringArray(R.array.list3));
-                spinner.setAdapter(adapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        spin = parent.getItemAtPosition(position).toString();
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+                spinner.setText("Selesai");
+                spin = spinner.getText().toString();
             }
 
 
