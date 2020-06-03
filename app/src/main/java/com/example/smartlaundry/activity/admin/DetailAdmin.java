@@ -109,9 +109,25 @@ public class DetailAdmin extends AppCompatActivity {
                     }
                 });
             }
-            else {
+            else if (step.equals("Jemput Pakaian")){
                 ArrayAdapter<String> adapter =  new ArrayAdapter<>(DetailAdmin.this, android.R.layout.simple_spinner_dropdown_item
                         , getResources().getStringArray(R.array.list2));
+                spinner.setAdapter(adapter);
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        spin = parent.getItemAtPosition(position).toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+            else {
+                ArrayAdapter<String> adapter =  new ArrayAdapter<>(DetailAdmin.this, android.R.layout.simple_spinner_dropdown_item
+                        , getResources().getStringArray(R.array.list3));
                 spinner.setAdapter(adapter);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override

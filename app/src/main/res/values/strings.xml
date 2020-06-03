@@ -8,13 +8,13 @@
     <string-array name="list1">
         <item>-Pilih-</item>
         <item>Jemput Pakaian</item>
-        <item>Pencucian</item>
-        <item>Selesai</item>
     </string-array>
-
     <string-array name="list2">
         <item>-Pilih-</item>
         <item>Pencucian</item>
+    </string-array>
+    <string-array name="list3">
+        <item>-Pilih-</item>
         <item>Selesai</item>
     </string-array>
 </resources>
