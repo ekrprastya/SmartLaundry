@@ -46,7 +46,7 @@ import static com.example.smartlaundry.utils.Path.USERS;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvname,tvsaldo;
-    private CardView cvprofile,cvpayment,cvlist,cvlistpro,cvcallcenter;
+    private CardView cvprofile,cvpayment,cvlist,cvlistpro,cvgoin;
     private String email,nama,alamat,nohp,photo,uid,stringsaldo;
     private int saldo;
     private AVLoadingIndicatorView avi;
@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MyBasketList.class);
             startActivity(intent);
             CustomIntent.customType(this,"fadein-to-fadeout");
+        });
+        cvgoin.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(), InformationActivity.class);
+            startActivity(intent);
+            CustomIntent.customType(this,"bottom-to-up");
         });
 
         //notif data order
@@ -269,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         cvprofile = findViewById(R.id.goprofile);
         cvpayment = findViewById(R.id.golaundry);
         cvlist =findViewById(R.id.gopament);
-        cvcallcenter = findViewById(R.id.gocall);
+        cvgoin = findViewById(R.id.goin);
         cvlistpro = findViewById(R.id.golaundrylist);
         notificationManager = NotificationManagerCompat.from(this);
     }

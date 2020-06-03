@@ -183,8 +183,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/gocall"
-            android:visibility="gone"
+            android:id="@+id/goin"
+            android:visibility="visible"
             android:layout_gravity="center"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="@dimen/_60sdp"
@@ -201,7 +201,7 @@
                     android:layout_toEndOf="@+id/help"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Call Center "
+                    android:text="Information "
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="#FFF"
@@ -210,7 +210,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:id="@+id/help"
-                    android:src="@drawable/ic_technology"
+                    android:src="@drawable/ic_info"
                     android:layout_height="80dp"
                     android:layout_alignParentStart="true"/>
             </RelativeLayout>

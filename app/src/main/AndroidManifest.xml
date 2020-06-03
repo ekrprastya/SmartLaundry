@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_apk_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionbar">
-        <activity android:name=".activity.admin.DetailTopUp"></activity>
+        <activity android:name=".activity.user.InformationActivity"></activity>
+        <activity android:name=".activity.admin.DetailTopUp" />
         <activity android:name=".activity.admin.DetailAdmin" />
         <activity android:name=".activity.admin.ListOrderTopup" />
         <activity android:name=".activity.admin.ListBasketAdmin" />
