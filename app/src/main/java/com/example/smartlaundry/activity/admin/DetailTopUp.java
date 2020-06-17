@@ -40,13 +40,14 @@ public class DetailTopUp extends AppCompatActivity {
     private int saldolama = 0;
     private int hasil;
     private ImageView imgbukti;
+    private String Saldobaru;
     private CircleImageView imageprofiletopup;
     private Locale localeID;
     private NumberFormat formatRupiah;
     private Button btnconfirm;
     private RequestOptions options ;
     private DatabaseReference databaseReference,dbuser;
-    private Query query,queryuser;
+    private Query query,queryuser,query2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,7 @@ public class DetailTopUp extends AppCompatActivity {
             saldo = data.getSaldo();
             saldolama = data.getSaldolama();
             query = databaseReference.orderByChild("key").equalTo(data.getKey());
+            query2 = databaseReference.orderByChild("uid").equalTo(data.getKey());
             queryuser = dbuser.orderByChild("nama").equalTo(data.getNama());
             textViewsaldo.setText(formatRupiah.format((double)saldo));
             hasil = saldolama+saldo;
@@ -97,19 +99,34 @@ public class DetailTopUp extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                                     ds.getRef().child("saldo").setValue(hasil);
+
                                 }
-                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                query2.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         for (DataSnapshot ds : dataSnapshot.getChildren()){
-                                            ds.getRef().removeValue();
+                                            ds.getRef().child("saldoakhir").setValue(hasil);
+
                                         }
-                                        Toasty.success(getApplicationContext(),"Pengisian Saldo Berhasil",Toasty.LENGTH_SHORT).show();
-                                        Intent intent1 = new Intent(getApplicationContext(),ListOrderTopup.class);
-                                        startActivity(intent1);
-                                        finishAffinity();
-                                        finish();
-                                        CustomIntent.customType(DetailTopUp.this,"bottom-to-up");
+                                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                                                    ds.getRef().removeValue();
+                                                }
+                                                Toasty.success(getApplicationContext(),"Pengisian Saldo Berhasil",Toasty.LENGTH_SHORT).show();
+                                                Intent intent1 = new Intent(getApplicationContext(),ListOrderTopup.class);
+                                                startActivity(intent1);
+                                                finishAffinity();
+                                                finish();
+                                                CustomIntent.customType(DetailTopUp.this,"bottom-to-up");
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
                                     }
 
                                     @Override
@@ -117,6 +134,7 @@ public class DetailTopUp extends AppCompatActivity {
 
                                     }
                                 });
+
                             }
 
                             @Override
@@ -130,5 +148,14 @@ public class DetailTopUp extends AppCompatActivity {
                     .show();
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent1 = new Intent(getApplicationContext(),ListOrderTopup.class);
+        startActivity(intent1);
+        finishAffinity();
+        finish();
+        CustomIntent.customType(DetailTopUp.this,"bottom-to-up");
     }
 }

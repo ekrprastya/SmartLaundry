@@ -44,6 +44,7 @@ import maes.tech.intentanim.CustomIntent;
 
 import static com.example.smartlaundry.utils.Path.ByOrder;
 import static com.example.smartlaundry.utils.Path.LAUNDRY;
+import static com.example.smartlaundry.utils.Path.NOTIF;
 import static com.example.smartlaundry.utils.Path.NaiveBayes;
 import static com.example.smartlaundry.utils.Path.USERS;
 
@@ -58,7 +59,7 @@ public class Payment extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
     private Button refresh,submit;
     private NumberFormat formatRupiah;
     private AntaresHTTPAPI antaresAPIHTTP;
-    private DatabaseReference dbRef,dbRef2,dbAll;
+    private DatabaseReference dbRef,dbRef2,dbnotiforder,dbnotifkeranjang;
     private android.app.AlertDialog alertDialog;
     private CircleImageView circleImageView;
     private String currentDate;
@@ -125,7 +126,7 @@ public class Payment extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
                             postdata.setNama(session.getSPNama());
                             postdata.setTanggal(currentDate);
                             alertDialog.show();
-//                            dbAll.push().setValue(postdata);
+                            dbnotifkeranjang.setValue(postdata);
                             dbRef2.push().setValue(postdata).addOnSuccessListener(aVoid -> {
                                 alertDialog.dismiss();
                                 dialogconfirmpayment.dismiss();
@@ -183,7 +184,7 @@ public class Payment extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
                         .setCancelable(false)
                         .setPositiveButton("Ya", (dialog, which) -> {
                             alertDialog.show();
-//                            dbAll.push().setValue(postdata);
+                            dbnotiforder.setValue(postdata);
                             dbRef.push().setValue(postdata).addOnSuccessListener(aVoid ->
                                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -245,6 +246,8 @@ public class Payment extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
         tvtelp.setText(session.getSpNohp());
         dbRef = FirebaseDatabase.getInstance().getReference(LAUNDRY).child(ByOrder);
         dbRef2 = FirebaseDatabase.getInstance().getReference(LAUNDRY).child(NaiveBayes);
+        dbnotiforder = FirebaseDatabase.getInstance().getReference(NOTIF).child(ByOrder);
+        dbnotifkeranjang = FirebaseDatabase.getInstance().getReference(NOTIF).child(NaiveBayes);
 
         Glide.with(getApplicationContext()).load(session.getSpPhoto()).into(circleImageView);
     }

@@ -43,6 +43,7 @@ import static com.example.smartlaundry.utils.App.CHANNEL_2_ID;
 import static com.example.smartlaundry.utils.App.CHANNEL_3_ID;
 import static com.example.smartlaundry.utils.Path.ByOrder;
 import static com.example.smartlaundry.utils.Path.LAUNDRY;
+import static com.example.smartlaundry.utils.Path.NOTIF;
 import static com.example.smartlaundry.utils.Path.NaiveBayes;
 import static com.example.smartlaundry.utils.Path.TOPUP;
 import static com.example.smartlaundry.utils.Path.USERS;
@@ -106,30 +107,23 @@ public class HomeAdmin extends AppCompatActivity {
         });
 
         //notif data order
-        DatabaseReference ready = FirebaseDatabase.getInstance().getReference(LAUNDRY).child(ByOrder);
+        DatabaseReference ready = FirebaseDatabase.getInstance().getReference(NOTIF).child(ByOrder);
         ready.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String status = dataSnapshot.child("status").getValue(String.class);
-                if (Objects.requireNonNull(status).equals("Sudah Dibayar")){
-                    notifnama= dataSnapshot.child("nama").getValue(String.class);
-                    notiftanggal= dataSnapshot.child("tanggal").getValue(String.class);
-                    Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_1_ID)
-                            .setSmallIcon(R.drawable.logo2)
-                            .setContentTitle("Ada Order Baru " +notiftanggal)
-                            .setContentText("Atas Nama " + notifnama+" Siap Di Jemput")
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                            .build();
-                    notificationManager.notify(1, notification);
-                }
-
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot,String s) {
+                Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_1_ID)
+                        .setSmallIcon(R.drawable.logo2)
+                        .setContentTitle("Ada Order Baru ")
+                        .setContentText("Periksa Daftar Orderan")
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                        .build();
+                notificationManager.notify(1, notification);
             }
 
             @Override
@@ -149,32 +143,16 @@ public class HomeAdmin extends AppCompatActivity {
         });
 
         //notif data keranjang
-        DatabaseReference basket = FirebaseDatabase.getInstance().getReference(LAUNDRY).child(NaiveBayes);
+        DatabaseReference basket = FirebaseDatabase.getInstance().getReference(NOTIF).child(NaiveBayes);
         basket.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                notifberat = Integer.parseInt(Objects.requireNonNull(dataSnapshot.child("berat").getValue()).toString());
-                notifhumidity = Integer.parseInt(Objects.requireNonNull(dataSnapshot.child("kelembaban").getValue()).toString());
-                notifnama= dataSnapshot.child("nama").getValue(String.class);
-                notiftanggal = dataSnapshot.child("tanggal").getValue(String.class);
-                if (notifberat > 9 || notifhumidity > 70){
-                    Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_2_ID)
-                            .setSmallIcon(R.drawable.logo2)
-                            .setContentTitle("Keranjang Update "+notiftanggal)
-                            .setContentText("Atas Nama " + notifnama)
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                            .build();
-                    notificationManager.notify(2, notification);
-                }
+
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                notifbasketpayment = dataSnapshot.child("status").getValue(String.class);
-                notifnama= dataSnapshot.child("nama").getValue(String.class);
-                notiftanggal= dataSnapshot.child("tanggal").getValue(String.class);
-                if (notifbasketpayment.equals("Sudah Dibayar")){
+
                     Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_2_ID)
                             .setSmallIcon(R.drawable.logo2)
                             .setContentTitle("Keranjang "+notiftanggal)
@@ -183,7 +161,7 @@ public class HomeAdmin extends AppCompatActivity {
                             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                             .build();
                     notificationManager.notify(2, notification);
-                }
+
             }
 
             @Override
@@ -208,14 +186,14 @@ public class HomeAdmin extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 notifnama= dataSnapshot.child("nama").getValue(String.class);
-                    Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_3_ID)
-                            .setSmallIcon(R.drawable.logo2)
-                            .setContentTitle("Ada Request TopUp ")
-                            .setContentText("Atas Nama " + notifnama)
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                            .build();
-                    notificationManager.notify(3, notification);
+                Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_3_ID)
+                        .setSmallIcon(R.drawable.logo2)
+                        .setContentTitle("Ada Request TopUp ")
+                        .setContentText("Atas Nama " + notifnama)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                        .build();
+                notificationManager.notify(3, notification);
 
             }
 
